@@ -15,6 +15,21 @@ const titles = {
   detail: 'PROJECTS'
 }
 
+const routeToView = {
+  '/': 'resume',
+  '/resume': 'resume',
+  '/portfolio': 'portfolio',
+  '/contact': 'contact',
+  '/detail': 'detail'
+}
+
+const viewToPath = {
+  resume: '/',
+  portfolio: '/portfolio',
+  contact: '/contact',
+  detail: '/detail'
+}
+
 function show(view){
   $$('.view').forEach(v=>v.classList.remove('active'))
   views[view].classList.add('active')
@@ -27,10 +42,17 @@ function show(view){
   }
 }
 
+function navigate(view, replace=false){
+  show(view)
+  const path = viewToPath[view] || '/'
+  if(replace) history.replaceState({view}, '', path)
+  else history.pushState({view}, '', path)
+}
+
 $$('.tab').forEach(b=>{
   b.addEventListener('click',()=>{
     const v = b.dataset.view
-    show(v)
+    navigate(v)
   })
 })
 
@@ -425,7 +447,7 @@ $$('.link').forEach(btn=>{
     } else {
       renderSlides(8, SLIDES[key]);
     }
-    show('detail')
+    navigate('detail')
   })
 })
 function toast(msg){
@@ -462,7 +484,15 @@ async function copyTextSafe(text){
   }
 }
 
-show('resume')
+window.addEventListener('popstate', ()=>{
+  const v = routeToView[location.pathname] || 'resume'
+  show(v)
+})
+
+;(function initRouter(){
+  const v = routeToView[location.pathname] || 'resume'
+  navigate(v, true)
+})()
 
 // Collapsible Text Toggle
 $$('.read-more-btn').forEach(btn => {
