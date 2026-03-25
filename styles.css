@@ -1,0 +1,600 @@
+:root{--bg1:#ffb56b;--bg2:#ffe29a;--bg3:#ff8a4c;--glass:rgba(255,255,255,.1);--border:rgba(255,255,255,.28);--text:#333333;--muted:#888888;--surface-strong:rgba(255,255,255,.28);--primary:#FF6B35;--primary-strong:#964B00;--high-contrast:#111111}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:#faf7f2;color:var(--text);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.mesh{position:fixed;inset:0;pointer-events:none;background:
+ radial-gradient(40% 50% at 15% 20%, rgba(255,181,107,.8), transparent 60%),
+ radial-gradient(35% 45% at 85% 30%, rgba(255,226,154,.85), transparent 60%),
+ radial-gradient(45% 55% at 30% 80%, rgba(255,138,76,.6), transparent 60%),
+ radial-gradient(60% 60% at 80% 80%, rgba(255,202,120,.5), transparent 60%);
+filter:blur(40px) saturate(110%);
+}
+.top{position:fixed;top:24px;left:0;right:0;display:flex;justify-content:flex-end;align-items:center;padding:16px 20px;z-index:10}
+.top::before{content:attr(data-title);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:33.333%;text-align:center;white-space:nowrap;font-family:'Bebas Neue',Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;letter-spacing:.14em;color:#999999;opacity:.15;font-size:clamp(54px,8vw,128px);line-height:1;pointer-events:none;z-index:0}
+.tabs{display:flex;gap:16px;position:relative;z-index:1}
+.tab{appearance:none;border:1px solid var(--border);background:var(--surface-strong);backdrop-filter:blur(12px) saturate(120%);-webkit-backdrop-filter:blur(12px) saturate(120%);padding:12px 24px;border-radius:24px;color:var(--text);letter-spacing:.2px;font-weight:600;cursor:pointer;box-shadow:0 8px 24px rgba(15,23,42,.15);transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease,color .2s ease;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+.tab:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,53,.25);background:rgba(255,255,255,.6);border-color:var(--primary)}
+.tab.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 4px 20px rgba(255,107,53,.4)}
+.tab:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+.container{max-width:min(1200px,92vw);margin:120px auto 64px;position:relative;z-index:5}
+.view{display:none}
+.view.active{display:block}
+.grid{display:grid;gap:20px}
+.grid.two{grid-template-columns:1.6fr .8fr}
+.grid.auto{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.grid.twoCols{grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.stack-col{display:grid;grid-template-columns:1fr;gap:16px}
+.heading{font-weight:800;font-size:18px;color:var(--text);margin-bottom:8px}
+.grid.fourCols{grid-template-columns:repeat(4, minmax(220px,1fr));gap:22px}
+.card{background:var(--glass);border:1px solid var(--border);backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%);border-radius:18px;box-shadow:0 12px 40px rgba(15,23,42,.18);padding:20px;color:var(--text)}
+.card.xl{min-height:220px}
+.card.photo{display:none}
+.profile-photo{width:100%;height:auto;display:block;border-radius:12px;pointer-events:none;-webkit-user-drag:none;user-select:none;object-fit:cover}
+.title{margin:0 0 6px 0;font-size:28px}
+.subtitle{margin:0 0 8px 0;font-size:18px}
+.muted{color:var(--muted)}
+.center{text-align:center}
+.section-head{margin-bottom:12px}
+.head{display:inline-block;padding:14px 18px;font-weight:600}
+.link{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;font-size:16px;cursor:pointer;aspect-ratio:1/1;padding:0;overflow:hidden}
+.link-img{width:100%;height:75%;object-fit:cover;background:rgba(0,0,0,0.03);border-bottom:1px solid rgba(255,255,255,0.1);display:block}
+.link-title{width:100%;height:25%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 12px;font-weight:600;line-height:1.3;color:var(--text);font-size:15px;background:rgba(255,255,255,0.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.link-subtitle{font-size:12px;font-weight:400;color:var(--muted);margin-top:2px;transform:scale(0.9)}
+.slides .card{height:160px}
+.label{font-size:18px;color:var(--text)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(30,30,30,.8);color:#fff;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:9999}
+.toast.show{opacity:1}
+@media (max-width:860px){.grid.two{grid-template-columns:1fr}.grid.twoCols{grid-template-columns:1fr}.grid.fourCols{grid-template-columns:repeat(2,minmax(160px,1fr))}.container{margin-top:112px}.slides .card{height:140px}.tab{padding:9px 14px}}
+@media (max-width:640px){.top::before{letter-spacing:.1em;font-size:clamp(42px,10vw,88px)}}
+
+.resume-info{display:grid;gap:24px;margin-top:12px}
+.info-block{display:flex;flex-direction:column;gap:4px}
+.info-label{font-size:16px;color:var(--text);font-weight:700;letter-spacing:0.02em;padding-bottom:0;width:fit-content;margin-bottom:0;display:flex;align-items:center;gap:6px;border-bottom:none}
+.info-label::before{content:'';width:6px;height:14px;background:var(--primary);border-radius:3px;display:inline-block}
+.info-content{display:flex;flex-direction:column;gap:2px}
+.info-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px}
+.info-main{font-size:15px;font-weight:600;color:var(--text)}
+.info-year{font-size:13px;color:var(--muted);font-feature-settings:"tnum";opacity:0.8}
+.info-detail{font-size:14px;color:var(--text);margin-left:0;opacity:0.9}
+.gpa{font-size:12px;color:var(--muted);background:rgba(0,0,0,0.04);padding:1px 5px;border-radius:3px;margin-left:4px;font-weight:500;opacity:0.7}
+.mt-2{margin-top:6px}
+/* Custom Resume Styles */
+.resume-section-title {
+  font-size: clamp(42px, 6vw, 56px);
+  font-weight: 900;
+  color: var(--primary);
+  margin: 0 0 32px 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.resume-item {
+  margin-bottom: 24px;
+}
+.resume-item:last-child {
+  margin-bottom: 0;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+.resume-role { color: var(--primary-strong); font-weight: 900; font-size: clamp(19px, 1.35rem, 22px); }
+.resume-company { color: var(--high-contrast); font-weight: 800; font-size: clamp(18px, 1.25rem, 20px); }
+.flex-spacer { flex: 1; }
+.resume-location,
+.resume-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Emphasis Variants */
+.ab-variant-a .resume-role{
+  color: var(--primary-strong);
+  font-weight: 900;
+  font-size: clamp(19px, 1.35rem, 22px);
+}
+.ab-variant-a .resume-role::before{
+  content: '›';
+  margin-right: 6px;
+  color: var(--primary-strong);
+}
+.ab-variant-a .resume-company{
+  color: var(--high-contrast);
+  font-weight: 800;
+  font-size: clamp(18px, 1.25rem, 20px);
+}
+
+.ab-variant-b .resume-role{
+  color: var(--primary-strong);
+  font-weight: 900;
+  font-size: clamp(20px, 1.45rem, 24px);
+  background: none;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+.ab-variant-b .resume-role::before{
+  content: '▸';
+  margin-right: 6px;
+  color: var(--primary-strong);
+}
+.ab-variant-b .resume-company{
+  color: var(--high-contrast);
+  font-weight: 800;
+  font-size: clamp(18px, 1.3rem, 21px);
+  background: none;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+.resume-honor {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--high-contrast);
+  margin-left: 1rem; /* align with sub-project title */
+}
+
+.resume-list {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* Increase indent for the first job's main bullet list */
+.resume-block .resume-item:first-of-type .resume-list {
+  padding-left: 2em;
+}
+.resume-block .resume-item:nth-of-type(3) .resume-list {
+  padding-left: 1em;
+}
+.resume-block .resume-item:nth-of-type(4) .resume-list {
+  padding-left: 2em;
+}
+.resume-list li {
+  margin-bottom: 6px;
+}
+.resume-list li:last-child {
+  margin-bottom: 0;
+}
+
+.resume-sub-project {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding-left: 1rem; /* was 16px */
+}
+.resume-sub-project-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--high-contrast);
+}
+.resume-sub-list {
+  list-style-type: disc;
+  padding-left: 0.75em;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.resume-sub-list li {
+  margin-bottom: 4px;
+}
+
+@media (max-width: 640px) {
+  .resume-header {
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: none;
+    margin-bottom: 6px;
+  }
+  .resume-date { margin-top: 2px; font-size: 13px; }
+  .ab-variant-a .resume-role, .ab-variant-b .resume-role{ font-size: clamp(18px, 1.25rem, 20px); }
+  .ab-variant-a .resume-company, .ab-variant-b .resume-company{ font-size: clamp(16px, 1.1rem, 18px); }
+  .resume-sub-project-title, .resume-honor { font-size: 15px; }
+  .resume-honor { margin-left: 0.5rem; }
+  .resume-sub-project { padding-left: 0.5rem; /* was 8px */ }
+}
+
+.info-list{margin:0;padding-left:16px;font-size:14px;color:var(--text);line-height:1.4;opacity:0.9}
+.info-list li{margin-bottom:0}
+.card.xl .title{font-size:36px;font-weight:800;letter-spacing:-0.02em;margin-bottom:4px;color:var(--text)}
+.detail-title{text-align:center;font-size:32px;font-weight:700;color:var(--text);margin:0 0 16px 0;padding:0;border:none;background:none;width:100%}
+.detail-links{display:flex;flex-direction:column;gap:4px;align-items:center;margin-bottom:32px;width:100%}
+.detail-link{font-size:12px;color:#999;text-decoration:none;transition:all 0.2s ease}
+.detail-link:hover{text-decoration:underline;color:var(--primary)}
+@media (max-width:640px){.detail-title{font-size:24px}}
+
+/* Contact Page Styles */
+.contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.contact-title {
+  font-size: clamp(42px, 6vw, 56px);
+  font-weight: 900;
+  color: var(--primary);
+  margin: 0 0 48px 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.contact-cards {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.contact-card {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18);
+  padding: 32px;
+  width: 320px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.25);
+  transform: translateY(-4px);
+}
+
+.contact-card:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.contact-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--primary);
+  stroke-width: 2;
+}
+
+.contact-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-all;
+}
+
+@media (max-width: 768px) {
+  .contact-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .contact-card {
+    width: 100%;
+    max-width: 320px;
+    height: 200px;
+  }
+  
+  .contact-title {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 24px 16px;
+  }
+  
+  .contact-card {
+    padding: 24px;
+    height: 180px;
+  }
+  
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .contact-text {
+    font-size: 14px;
+  }
+}
+
+/* Fullscreen Overlay Styles */
+.fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.fullscreen-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fullscreen-overlay canvas {
+  max-width: 95vw;
+  max-height: 95vh;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.fullscreen-overlay.active canvas {
+  transform: scale(1);
+}
+
+.fullscreen-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  transition: background 0.2s;
+  z-index: 1001;
+}
+
+/* PDF Reader Mode */
+.fullscreen-overlay.pdf-reader-mode {
+  display: block;
+  overflow-y: auto;
+  padding: 0; /* Removed fixed padding to respect original margins */
+  background: rgba(30, 30, 30, 0.98);
+  backdrop-filter: blur(10px);
+}
+
+.pdf-container {
+  max-width: 100%; /* Allow full width */
+  width: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Remove gap between pages for continuous reading */
+  min-height: 100%;
+  align-items: center; /* Center pages horizontally */
+}
+
+.pdf-page {
+  width: auto; /* Let canvas determine width based on scale */
+  max-width: 100%; /* Ensure it fits in viewport */
+  height: auto;
+  display: block;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  /* border-radius removed to match original document look */
+  margin-bottom: 20px; /* Optional: small gap between pages */
+}
+
+.pdf-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.pdf-loading::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.pdf-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: #333;
+  max-width: 90%;
+  width: 400px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.pdf-error h3 {
+  margin: 0 0 12px;
+  color: #d32f2f;
+}
+
+.pdf-error p {
+  margin: 0 0 24px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.pdf-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #e55a2b;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.btn-outline:hover {
+  border-color: #999;
+  color: #333;
+}
+
+/* Ensure close button is fixed and accessible */
+.fullscreen-close {
+  position: fixed; /* Override absolute */
+  top: 20px;
+  right: 20px;
+  width: 48px; /* Requirement: 48x48 */
+  height: 48px;
+  font-size: 28px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+}
+
+.fullscreen-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.fullscreen-close:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.card canvas {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.card canvas:hover {
+  transform: scale(1.02);
+}
+
+/* Profile Card Grid (12 columns) */
+.profile-card{margin-bottom:24px;padding:clamp(16px,2vw,24px)}
+.profile-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px;align-items:start}
+.profile-photo-col{grid-column:1/span 3;grid-row:1}
+.profile-header-col{grid-column:4/span 9;grid-row:1;display:flex;flex-direction:column;gap:8px}
+.profile-name-row{display:flex;align-items:center;gap:16px;flex-wrap:nowrap}
+.profile-name-row .profile-name{margin:0;line-height:1}
+/* removed quick contact action buttons */
+.profile-awards-col{grid-column:1/span 6;grid-row:2}
+.profile-skills-col{grid-column:7/span 6;grid-row:2}
+.profile-name{margin:0 0 clamp(24px,5vw,40px) 0;font-size:clamp(48px,6vw,64px);font-weight:600;color:#1a1a1a;line-height:1.05}
+.profile-edu{font-size:18px;font-weight:400;color:#555}
+.profile-edu .info-label{font-size:16px;color:#555;font-weight:600;opacity:0.9}
+
+/* Profile details two-column grid inside right column */
+.profile-details-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,40px)}
+.profile-section-title{font-size:24px;font-weight:700;color:#000;margin:0 0 12px 0}
+.profile-section-title.fixed{flex:0 0 64px;color:var(--primary);margin:0}
+.edu-entry{margin-bottom:0}
+.edu-main{display:flex;flex-direction:column;align-items:flex-start;row-gap:2px;font-weight:600;color:#111}
+.edu-year{font-size:13px;color:var(--muted);opacity:0.85;align-self:flex-start;margin-top:2px;font-feature-settings:"tnum"}
+.edu-sub{font-size:14px;color:#555;margin-top:4px;line-height:1.45}
+.edu-list{display:flex;flex-direction:column;gap:6px}
+.plain-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.plain-list li{line-height:1.45}
+.awards-list li{display:grid;grid-template-columns:1fr auto;align-items:baseline;column-gap:2ch}
+.award-meta{color:var(--muted);justify-self:end;font-size:14px;font-feature-settings:"tnum"}
+.section-row{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.spacer{height:24px}
+
+@media (max-width:860px){
+  .profile-details-grid{grid-template-columns:1fr;gap:24px}
+  .profile-section-title.fixed{flex:0 0 auto}
+}
+
+/* Bottom modules layout: 2/3 + 1/3 */
+
+@media (max-width:860px){
+  .profile-grid{grid-template-columns:repeat(6,1fr)}
+  .profile-photo-col{grid-column:1/span 2}
+  .profile-header-col{grid-column:3/span 4}
+  .profile-awards-col{grid-column:1/span 6}
+  .profile-skills-col{grid-column:1/span 6}
+}
+
+/* removed contact stack styles */
+
+/* Hero (profile-card) layout rules for md+ (iPad/PC) */
+@media (min-width:768px){
+  .profile-grid{display:flex;gap:clamp(16px,3vw,32px);align-items:stretch}
+  .profile-photo-col{flex:0 0 auto;align-self:stretch;position:relative;max-width:20%}
+  .profile-header-col{flex:1;display:flex;flex-direction:column}
+  .profile-photo{position:static;width:auto;max-width:100%;height:100%;object-fit:contain;display:block}
+  .profile-details-grid{align-items:start}
+  .profile-name{margin-bottom:0.66em}
+  .edu-main{display:grid;grid-template-columns:1fr auto;align-items:baseline;column-gap:2ch}
+  .edu-year{justify-self:end;margin-top:0}
+  .section-row{flex-direction:row;gap:16px}
+  .section-row > .edu-list,
+  .section-row > .plain-list{
+    flex:1;
+    min-width:0;
+  }
+}

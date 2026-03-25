@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>个人介绍 · 作品集 · 联系方式</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+  </head>
+  <body>
+    <div class="mesh"></div>
+    <header class="top">
+      <div class="left"></div>
+      <nav class="tabs">
+        <button class="tab active" data-view="resume">简历</button>
+        <button class="tab" data-view="portfolio">作品集</button>
+        <button class="tab" data-view="contact">联系方式</button>
+      </nav>
+    </header>
+    <main class="container">
+      <section id="resume" class="view active">
+        <section class="card xl profile-card" aria-labelledby="profile-name">
+          <div class="profile-grid">
+            <div class="profile-photo-col">
+              <img src="photo.jpg" alt="张玥" class="profile-photo" />
+            </div>
+            <div class="profile-header-col">
+              <div class="profile-name-row">
+                <h1 id="profile-name" class="profile-name">张玥</h1>
+              </div>
+              <div class="profile-details-grid">
+                <div class="edu-section">
+                  <div class="section-row">
+                    <div class="profile-section-title fixed">教育</div>
+                    <div class="edu-list">
+                      <div class="edu-entry">
+                        <div class="edu-main">
+                          <span>哈尔滨工业大学 本科</span>
+                          <span class="edu-year">2017.08–2022.07</span>
+                        </div>
+                    <div class="edu-sub">社会学 主修 <span class="gpa">GPA: 85/100</span></div>
+                        <div class="edu-sub">数字媒体艺术 辅修 <span class="gpa">GPA: 92/100</span></div>
+                      </div>
+                      <div class="edu-entry">
+                        <div class="edu-main">
+                          <span>香港中文大学 硕士</span>
+                          <span class="edu-year">2022.09–2023.11</span>
+                        </div>
+                        <div class="edu-sub">性别研究 <span class="gpa">GPA: 3.4/4</span></div>
+                      </div>
+                      <div class="edu-entry">
+                        <div class="edu-main">
+                          <span>香港理工大学 暑期进修</span>
+                      <span class="edu-year">2025.07-09</span>
+                        </div>
+                        <div class="edu-sub">生成式人工智能与人文 <span class="gpa">PASS</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="meta-section">
+                  <div class="section-row">
+                    <div class="profile-section-title fixed">获奖</div>
+                    <ul class="plain-list awards-list">
+                      <li><span class="award-text">哈尔滨工业大学优秀毕业论文</span><span class="award-meta">2022</span></li>
+                      <li><span class="award-text">字节Trae黑客松入围</span><span class="award-meta">2025</span></li>
+                      <li><span class="award-text">魔搭社区环球黑客松复赛入围</span><span class="award-meta">2026</span></li>
+                      <li><span class="award-text">深圳女性黑客松入围</span><span class="award-meta">2026</span></li>
+                    </ul>
+                  </div>
+                  <div class="spacer"></div>
+                  <div class="section-row">
+                    <div class="profile-section-title fixed">技能</div>
+                    <ul class="plain-list skills-list">
+                      <li><b>语言：</b>英语<span class="gpa">雅思6.5</span> 普通话<span class="gpa">二甲</span> 粤语<span class="gpa">流利</span></li>
+                      <li><b>产品设计：</b>墨刀、Google AI Studio、Trae</li>
+                      <li><b>数据分析：</b>Python、SPSS、Nvivo</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <div class="card xl">
+          <h2 class="resume-section-title">工作与黑客松项目</h2>
+            <div class="resume-block">
+              <!-- Experience 1 -->
+              <div class="resume-item">
+                <div class="resume-header">
+                  <span class="resume-role">产品经理&队长</span>
+                  <span class="resume-company">环球黑客松复赛入围</span>
+                  <span class="flex-spacer"></span>
+                  <span class="resume-location">香港</span>
+                  <span class="resume-date">2026.01-2026.03</span>
+                </div>
+                <div class="resume-honor">FocusPal ｜ 专为ADHD（注意力缺陷及多动障碍）患者设计的AI待办软件</div>
+                <ul class="resume-list">
+                  <li><strong>AI辅助竞品与用户研究：</strong>锚定“时间感缺失”与“启动困难”两大痛点，确立了以“AI辅助+拆解任务的低摩擦启动”和“时间可视化”为核心的产品策略</li>
+                  <li><strong>Vibe Coding 演示Demo：</strong>8小时内独立完成前端UX设计与核心功能展示，顺利入围复赛</li>
+                  <li><strong>一周内上线MVP产品：</strong>协调有限资源，制定功能优先级。设计AI任务拆解与引导机制，降低用户启动成本；优化提示词与模型调用策略，提升任务识别准确率</li>
+                </ul>
+              </div>
+
+              <!-- Experience 2 -->
+              <div class="resume-item">
+                <div class="resume-header">
+                  <span class="resume-role">AI产品经理</span>
+                  <span class="resume-company">玄源科技有限公司</span>
+                  <span class="flex-spacer"></span>
+                  <span class="resume-location">深圳</span>
+                  <span class="resume-date">2025.09-2026.01</span>
+                </div>
+                
+                <div class="resume-sub-project">
+                  <div class="resume-sub-project-title">Yonbo｜高端多模态儿童陪伴机器人（海外家庭市场）</div>
+                  <ul class="resume-list" style="list-style-type: none; padding-left: 0;">
+                    <li style="margin-bottom: 8px;">针对AI能力感知弱、用户活跃度低、营销转化差问题，主导交互升级、智能体搭建及GTM策略优化：</li>
+                    <li>
+                      <ul class="resume-sub-list">
+                        <li><strong>多模态交互体验迭代与大模型调优：</strong>重构提示词与记忆机制，解决产品情商低、记忆断层问题，相关客诉量归零。设计并验证“基于时间戳的连续视觉识别”方案，突破静态图片识别局限，深度测评GPT-4o等多款大模型，建立标准化测试SOP，产出MVP，已确立为二代产品升级方向</li>
+                        <li><strong>智能体生态从0到1搭建与自动化降本：</strong>根据儿童心理学、北美教育体系、流行IP，主导产出40款基于prompt的语音智能体(30款外部共创)。利用Google AI Studio搭建“AI初筛+人工精调”自动化生成与测试流水线。保持与真人专家同等质量同时，单款智能体开发成本降低92%(¥600→¥50)，周期缩短71%</li>
+                        <li><strong>跨部门敏捷交付与商业化增长探索：</strong>统筹研发、设计、市场等6人跨职能团队，主导“语音+APP二维码”双模式迭代。上线首日定位大模型注意力分散问题，24小时内回滚，一周内重构上线并建立灰度发布机制。功能稳定后，日均对话轮次提升100%（2轮→4轮）。结合KOL数据与专家访谈提出向科技类男性博主倾斜资源的策略，被市场部门采纳并落地</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="resume-sub-project">
+                  <div class="resume-sub-project-title">AIPI｜便携AI智能体硬件（海外成人市场）</div>
+                  <ul class="resume-list" style="list-style-type: none; padding-left: 0;">
+                    <li style="margin-bottom: 8px;">一代产品闲置率高、口碑受损，主导用户反馈与竞品分析，确立二代产品的主要功能：</li>
+                    <li>
+                      <ul class="resume-sub-list">
+                        <li><strong>痛点挖掘与战略转型：</strong>采用“AI+人工”快速清洗并剖析500+条用户差评、竞品数据及10+份深度访谈，定位“缺乏具体使用场景、付费模式不清、电池额外购买”的核心痛点，推动二代确立“聚焦陪伴功能”的战略方向</li>
+                        <li><strong>核心场景定义与工作流验证：</strong>情感陪伴场景拆解为“宠物”与“分身（偶像/逝者）”两大方向。主导设计分身创建SOP（图像+语音+性格复刻）搭建“问卷输入-自动生成Prompt与预制记忆”的完整闭环，成果顺利通过内部评审</li>
+                        <li><strong>交互机制设计与推动立项：</strong>针对AI硬件误听问题，设计基于聊天报告的“长短期记忆用户确认转化机制”，输出二代产品的详细功能列表，协助项目负责人完成软硬件立项（下一年度核心产品）</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Experience 3 -->
+              <div class="resume-item">
+                <div class="resume-header">
+                  <span class="resume-role">AI 产品经理助理</span>
+                  <span class="resume-company">香港中文大学 医学院</span>
+                  <span class="flex-spacer"></span>
+                  <span class="resume-location">香港</span>
+                  <span class="resume-date">2022.09-2023.05</span>
+                </div>
+                
+                <div class="resume-sub-project">
+                  <div class="resume-sub-project-title">青少年失眠数字疗法 Telegram Chatbot（内测期）</div>
+                  <ul class="resume-list">
+                    <li><strong>留存瓶颈诊断与用户流失建模：</strong>针对首期 200 名内测用户一周内流失 50% 的严峻情况，深度访谈 20+ 名典型流失用户（含 3 日内零回复受众）</li>
+                    <li><strong>定位核心痛点：</strong>Telegram 端的交互内容不符合移动端阅读习惯（内容长难深、缺乏即时反馈感），导致付费用户回复率与对话频次远低于预期</li>
+                    <li><strong>交互体验优化与 A/B 测试验证：</strong>协同医学专家将学术语言转化为“碎片化、即时化”的手机聊天文案，优化排版与消息推播节奏。在存量 100 名用户中设计并落地为期一周的 A/B 测试，结果显示：实验组流失率降低 37.5%（流失速度由 8 人/周减缓至 5 人/周）</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Experience 4 -->
+              <div class="resume-item">
+                <div class="resume-header">
+                  <span class="resume-role">内容与用户运营实习生</span>
+                  <span class="resume-company">快看漫画（漫剧方向）</span>
+                  <span class="flex-spacer"></span>
+                  <span class="resume-location">北京</span>
+                  <span class="resume-date">2021.09-2022.03</span>
+                </div>
+                <ul class="resume-list">
+                  <li><strong>常规内容迭代与更新（S级项目）：</strong>负责晋江头部 IP 改编作品的日常更新保障，协同制作团队产出宣传素材，确保 App 内资源位的精准投放与高质更新，维持存量用户活跃度</li>
+                  <li><strong>新作规划与分发策略：</strong>主导新作上线的品鉴与节奏把控。基于女频细分方向（无CP/耽美/BG），制定多样化排期策略，确保不同受众群体在各时段均有匹配的优质内容供给</li>
+                  <li><strong>数据监控与异常复盘：</strong>作品上线及常规更新的数据监测，识别转化不如预期或数据异常下滑的项目，为宣发优化提供核心数据预警</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+
+      </section>
+
+      <section id="contact" class="view">
+        <div class="contact-container">
+          <h1 class="contact-title">CONTACT</h1>
+          <div class="contact-cards">
+            <button type="button" class="contact-card email-card" aria-label="复制邮箱" data-copy="zhangyue20211@outlook.com">
+              <div class="contact-card-content">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span class="contact-text">zhangyue20211@outlook.com</span>
+              </div>
+            </button>
+            <button type="button" class="contact-card phone-card" aria-label="复制手机号" data-copy="13994360028">
+              <div class="contact-card-content">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span class="contact-text">13994360028</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="view">
+        <div class="grid fourCols">
+          <button class="card link" data-detail="user-research">
+            <img src="assets/user-research-new.png" alt="市场与用户研究" class="link-img" />
+            <div class="link-title">市场与用户研究<br><span class="link-subtitle">（AI陪伴硬件）</span></div>
+          </button>
+          <button class="card link" data-detail="prompt-gen">
+            <img src="assets/prompt-gen.png" alt="自动化prompt生成" class="link-img" />
+            <div class="link-title">自动化prompt生成<br><span class="link-subtitle">（2025字节Trae黑客松入围）</span></div>
+          </button>
+          <button class="card link" data-detail="adhd">
+            <img src="assets/adhd-ai.png" alt="ADHD AI教练" class="link-img" />
+            <div class="link-title">ADHD AI教练<br><span class="link-subtitle">（2026环球黑客松复赛入围）</span></div>
+          </button>
+          <button class="card link" data-detail="echomap">
+            <img src="assets/echo-map.png" alt="防性骚扰地图" class="link-img" />
+            <div class="link-title">防性骚扰地图<br><span class="link-subtitle">（2026女性黑客松入围）</span></div>
+          </button>
+          <button class="card link" data-detail="gender">
+            <img src="assets/gender.png" alt="性别研究" class="link-img" />
+            <div class="link-title">性别研究<br><span class="link-subtitle">（性生活/性耻感/性别偏见）</span></div>
+          </button>
+          <button class="card link" data-detail="aging">
+            <img src="assets/aging-health.png" alt="老龄化与公共卫生" class="link-img" />
+            <div class="link-title">老龄化与公共卫生<br><span class="link-subtitle">（大湾区养老一体化/港人北上）</span></div>
+          </button>
+
+        </div>
+      </section>
+
+      <section id="detail" class="view">
+        <h2 id="detail-title" class="detail-title"></h2>
+        <div id="detail-links" class="detail-links"></div>
+        <div class="grid auto slides" id="slides"></div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
